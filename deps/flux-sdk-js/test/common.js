@@ -1,0 +1,6 @@
+// Shared mocha test setup.
+// Expected to be required using mocha -r.
+var chai = require('chai');
+var dirtyChai = require('dirty-chai');
+chai.use(dirtyChai);
+var expect = chai.expect;
