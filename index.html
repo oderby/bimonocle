@@ -1,7 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>bimonocle</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="ACADIA2015 Hackathon Team">
+    <!-- <link rel="icon" href="../../favicon.ico"> -->
+
+    <title>bimonacle</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="dist/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="spincycle.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
     <script type="text/javascript" src="deps/jquery-1.9.0.js"></script>
 </head>
 <body>
@@ -13,6 +37,67 @@
         <!--$("#Spectacles_output").resize();-->
     <!--});-->
 <!--</script>-->
+
+  <div class="container">
+
+      <!-- Static navbar -->
+      <!-- <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">bimonocle</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#">Home</a></li> -->
+              <!-- <li><a href="#">About</a></li> -->
+            <!-- </ul> -->
+         <!--  </div> --><!--/.nav-collapse -->
+        <!-- </div> --><!--/.container-fluid -->
+      <!-- </nav> -->
+
+      <!-- Main component for a primary marketing message or call to action -->
+
+      <div class="jumbotron">
+        <div class="row">
+          <div class="col-md-6">
+            <h1><img src="images/logo2.png" height="15%" width="15%"> bimonocle</h1>
+            <p >View changes from Grasshopper and Revit instantaneously in your web browser. Credit to <a href="https://flux.io/">Flux</a> and <a href="http://core.thorntontomasetti.com/apps/Spectacles/">Spectacles</a></p>
+
+              <form action="/api/login" method="post" class="form-signin">
+                <label for="mail" class="sr-only">Email address</label>
+                <input type="email" id="mail" name="user" class="form-control" placeholder="Email address" required autofocus>
+                <label for="password" class="sr-only">Password</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+                <button class="btn btn-lg btn-success btn-block" type="submit">Log In to Server &raquo;</button>
+              </form>
+
+              <hr></hr>
+              <h2>Instructions</h2>
+              <p>
+              1. Pipe your Grasshopper or Revit data to Flux.</br>
+              2. Login (above) to Flux via web server.</br>
+              3. Select your project and your key.</br>
+              4. Click view and the model will load in your browser.</br> 
+              5. Make changes to the original 3D file.</br>
+              6. View the changes update in real-time in bimonocle</br></br>
+            </p>
+            <p><b>Proposed Next Step:</b> Add VR stereo distrotion for viewing in the Google Cardboard and other mobile VR headsets.</p>
+            
+        </div>
+          
+          <div class="col-md-1"></div>
+          <div class="col-md-5"><img src="images/workflow.png" height="100%" width="100%"></div>
+          
+      </div>
+      </div>
+
+    </div> <!-- /container -->
 
 
 <form action="/api/login" method="post">
@@ -28,8 +113,13 @@
         <button type="submit">Send your message</button>
     </div>
 </form>
+
 <!--<div class="button">-->
     <!--<button type="submit">get projects</button>-->
 <!--</div>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
 </body>
 </html>
