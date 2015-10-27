@@ -7,19 +7,21 @@
     <script type="text/javascript" src="deps/Projector.js"></script>
     <link rel='stylesheet' type='text/css' href='css/SPECTACLES.css'/>
     <script type="text/javascript" src="deps/SPECTACLES.js"></script>
+    <script type="text/javascript" src="deps/flux-geom.js"></script>
 </head>
 <body>
 <div id="Spectacles_output" style="position:fixed; top:0; left:0; width:100%; height:100%;"></div>
+
 <script type="application/javascript">
     var mySpectacles;
     //fires when everything has loaded
     $(document).ready(function(){
 
         //load our sample JSON file from disk
-        $.getJSON("/api/view.json", function( data ){
+        $.getJSON("/api/data?project=abON29gYLQEga9XJX&key=40209d42ede04d92524db0573d397886", function( data ){
             //once loaded, initialize a Spectacles viewer by passing in the div to bind to, the json data, and a callback function
             //where we can enable application functionality in nice clean chunks
-            mySpectacles = new SPECTACLES($("#Spectacles_output"), data, function(app){
+            mySpectacles = new SPECTACLES($("#Spectacles_output"), createObject(data.value[0]).mesh, function(app){
 
                 //call the UI / functionality modules
 //        app.userInterface();

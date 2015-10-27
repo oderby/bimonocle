@@ -417,7 +417,7 @@ var SPECTACLES = function (divToBind, jsonFileData, callback) {
     //a function to open a file from disk
     //found this method here: http://www.javascripture.com/FileReader
     SPECT.jsonLoader.openLocalFile = function (event) {
-       
+
         //the input object
         var input = event.target;
 
@@ -530,20 +530,21 @@ var SPECTACLES = function (divToBind, jsonFileData, callback) {
         }
 
         //parse the JSON into a THREE scene
-        var loader = new THREE.ObjectLoader();
+//        var loader = new THREE.ObjectLoader();
         SPECT.scene = new THREE.Scene();
-        SPECT.scene = loader.parse(jsonToLoad);
+        SPECT.scene.add(jsonToLoad);
+//        SPECT.scene = jsonToLoad;
         //SPECT.scene.fog = new THREE.FogExp2(0x000000, 0.025);
 
         //call helper functions
         SPECT.jsonLoader.makeFaceMaterialsWork();
         SPECT.jsonLoader.processSceneGeometry();
-        SPECT.jsonLoader.computeBoundingSphere();
+//        SPECT.jsonLoader.computeBoundingSphere();
         //SPECT.zoomExtents();
         //SPECT.views.storeDefaultView();
 
         //set up the lighting rig
-        SPECT.lightingRig.createLights();//note - i think we should check to see if there is an active lighting UI and use those colors to init lights if so...
+//        SPECT.lightingRig.createLights();//note - i think we should check to see if there is an active lighting UI and use those colors to init lights if so...
 
         //if those chunks have been enabled by the outside caller, call getViews and getLayers on the scene.
         if (SPECT.views.viewsEnabled) {
@@ -692,7 +693,10 @@ var SPECTACLES = function (divToBind, jsonFileData, callback) {
             //element to the attributes elements list so selection works.
             if (items[i].hasOwnProperty("geometry")) {
                 //three.js stuff
-                items[i].geometry.mergeVertices();
+
+                if (items[i].geometry.mergeVertices) {
+                    items[i].geometry.mergeVertices();
+                }
                 items[i].geometry.computeFaceNormals();
                 items[i].geometry.computeVertexNormals();
                 items[i].castShadow = true;
@@ -714,7 +718,9 @@ var SPECTACLES = function (divToBind, jsonFileData, callback) {
                 var itemsChildren = items[i].children;
                 for (var k = 0, kLen = itemsChildren.length; k < kLen; k++) {
                     if (itemsChildren[k].hasOwnProperty("geometry")) {
-                        itemsChildren[k].geometry.mergeVertices();
+                        if (itemsChildren[k].geometry.mergeVertices) {
+                            itemsChildren[k].geometry.mergeVertices();
+                        }
                         itemsChildren[k].geometry.computeFaceNormals();
                         itemsChildren[k].geometry.computeVertexNormals();
                         itemsChildren[k].material.side = 2;
@@ -735,10 +741,15 @@ var SPECTACLES = function (divToBind, jsonFileData, callback) {
     SPECT.jsonLoader.computeBoundingSphere = function () {
         //loop over the children of the THREE scene, merge them into a mesh,
         //and compute a bounding sphere for the scene
-        var geo = new THREE.Geometry();
+        var geo = new THREE.BufferGeometry;
+//        var geo = new THREE.Object3D();
         SPECT.scene.traverse(function (child) {
             if (child instanceof THREE.Mesh) {
-                geo.merge(child.geometry);
+                var g= child.geometry;
+                if (g instanceof THREE.Geometry) {
+                    g = new THREE.BufferGeometry().fromGeometry(g);
+                }
+                geo.merge(g);
             }
         });
         geo.computeBoundingSphere();
@@ -1010,7 +1021,7 @@ var SPECTACLES = function (divToBind, jsonFileData, callback) {
         //OPEN FILE
         this.openLocalFile = function () {
 
-            //If an object is selected, this will make sure to hide the attributes. 
+            //If an object is selected, this will make sure to hide the attributes.
             SPECT.attributes.attributeListDiv.hide("slow");
 
             //this should show a form that lets a user open a file
